@@ -1,0 +1,53 @@
+Sistema pequeno para criar uma aplicação com acesso ao banco de dados sem que precise instalar pacotes pesados de base de dados...
+
+Crie o projeto > abra as ferramentas > vá em Gerenciador de Pacotes do NuGet > Gerenciador de Pacotes do NuGet para solução > clique em procurar > filte com "Sqlite" >
+procure System.Data.SQlite > do lado direito clique no nome do projeto > instale > vai abrir uma janela de OK > Pronto > esta nas referencias...
+
+Ao abrir a pasta do projeto vai ter uma pasta chamada "Packages" aonde esta os arquivos dll do sqlite
+Lembrando que ao abrir a pasta "link" vai mostar as versoes do netframework tem para o sqlite ! 
+
+após isso abrir a pasta packages e criei em meu "source" aonde fica os arquivos que crio uma pasta chamada "Sqlite"
+nessa pasta "Sqlite" eu copiei os arquivos de dentro da pasta packages > "Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3" > buiild > todos os arquivos de dentro da build eu colei na pasta "Sqlite_build" em "source"
+em seguida eu copiei mais um arquivo da pasta packages > "System.Data.SQLite.Linq.1.0.113.0" > lib > peguei todos os arquivos e colei na pasta "Sqlite" em "Source"
+
+com isso toda vez que eu vou criar um projeto e utilizar o Sqlite eu posso utilizar essa pasta, pois la ja contem as dll necessaria
+para fazer isso faça o seguinte
+crie o projeto, abra a pasta desse projeto, e dentro da pasta debug cole os arquivos dll (mas olhe o framework dele para nao pegar o errado.)
+precisa colar o arquivo dll da pasta  Sqlite e o arquivo dll da pasta Sqlite_build, na build verificar a versão do sistema se é 32bits ou 64bits
+
+
+
+
+
+Quando for criar o projeto ao adicionar o sqlite nas referencias lembre de quando clicar no projeto colocar "using System.Data.SQLite;"
+ele tem quase todas as funções iguais do SqlserverCE ! para ligar é o mesmo metodo
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SQLite;
+using System.Windows.Forms;
+
+namespace SqliteCriandoDataBase
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //criar a base de dados
+            SQLiteConnection.CreateFile(@"C:\csharp\base.db"); //criando a base de dados sqlite é bem mais facil !
+        }
+    }
+    
+}
