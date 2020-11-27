@@ -52,31 +52,3 @@ Quando for criar o projeto ao adicionar o sqlite nas referencias lembre de quand
 ele tem quase todas as funções iguais do SqlserverCE ! para ligar é o mesmo metodo
 
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SQLite;
-using System.Windows.Forms;
-
-namespace SqliteCriandoDataBase
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //criar a base de dados
-            SQLiteConnection.CreateFile(@"C:\csharp\base.db"); //criando a base de dados sqlite é bem mais facil !
-        }
-    }
-    
-}
