@@ -1,5 +1,34 @@
 Sistema pequeno para criar uma aplicação com acesso ao banco de dados sem que precise instalar pacotes pesados de base de dados...
+• Lembrando que o SQLite trabalha com todo banco de dados em um único arquivo.
+• A SQLite suporta estes tipos de dados: Blob, Integer, Null, Text e Real.
+----------------------------------------------------------------------------------
+Quando Usar SQLite
+Existem certos momentos em que a SQLite pode ser mais efetiva do que usar a MySQL. Alguns desses cenários são:
 
+Quando se desenvolve pequenos aplicativos independentes
+Projetos menores que não exigem muita escalabilidade
+Quando você tem a exigência de ler e escrever direto da unidade de armazenamento
+Desenvolvimento básico e testes
+----------------------------------------------------------------------------------
+Prós e Contras – SQLite 
+Vamos resumir rapidamente as diferenças essenciais entre as duas opções:
+
+Vantagens da SQLite:
+
+Baseada em arquivos e fácil de configurar e usar
+Adequada para desenvolvimento e testes básicos
+Facilmente transportável
+Usar sintaxe SQL padrão com alterações mínimas
+Fácil de usar
+
+
+Desvantagens da SQLite:
+
+Não possui recursos de segurança ou gerenciamento de usuários
+Não é facilmente escalável
+Não é adequada para grandes bases de dados
+Não pode ser customizada
+----------------------------------------------------------------------------------
 Crie o projeto > abra as ferramentas > vá em Gerenciador de Pacotes do NuGet > Gerenciador de Pacotes do NuGet para solução > clique em procurar > filte com "Sqlite" >
 procure System.Data.SQlite > do lado direito clique no nome do projeto > instale > vai abrir uma janela de OK > Pronto > esta nas referencias...
 
