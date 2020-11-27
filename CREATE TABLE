@@ -1,0 +1,105 @@
+aqui veremos como é feita os seguintes itens
+• onde vai ficar e como é feita a pasta da base de dados
+• como criar a ligação a base de dados
+• como criar a tabela para a base de dados
+• como gravar um contato na base de dados
+• como carregar os contatos numa listbox (mostrar ele para o usuario)
+
+
+é o passo a passo para criar uma aplicação com base de dados (os comandos são quase iguais para todos sql's
+
+Utilizado = 3 botões e 1 listbox
+
+---------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SQLite;
+using System.Windows.Forms;
+
+namespace SqliteCriandoDataBase
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //criar o arquivo da base de dados
+            //SQLiteConnection.CreateFile(@"C:\csharp\base.db");
+            
+            //criar a ligação com a base de dados
+            SQLiteConnection conectar = new SQLiteConnection();
+            conectar.ConnectionString = @"Data source = C:\csharp\base.db; Version = 3";
+            conectar.Open();
+            //OBS como meu pc é 64bits eu tive que por uma dll x86 ! 
+
+            //criar uma tabela na base de dados(limite de 500 contatos)
+            string query = "CREATE TABLE contatos" +
+                           "(" +
+                                 "id_contato           int," +
+                                  "nome                 varchar(50)," +
+                                  "telefone             varchar(20)"+
+                           ")";
+
+            SQLiteCommand comando = new SQLiteCommand(query, conectar);
+             comando.ExecuteNonQuery();
+
+
+
+
+
+            MessageBox.Show("deu certo");
+
+            
+        }
+        //============================================================================
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //gravar um contato na base de dados
+            SQLiteConnection conectar = new SQLiteConnection();
+            conectar.ConnectionString = @"Data source = C:\csharp\base.db; Version = 3";
+            conectar.Open();
+                                                     //0 = id_contato, vitor = nome, 123455 = telefone
+            string query = "INSERT INTO contatos VALUES (0,'vitor', '123455')";
+
+            SQLiteCommand comando = new SQLiteCommand(query, conectar);
+            comando.ExecuteNonQuery();
+
+            comando.Dispose();
+            conectar.Dispose();
+
+            MessageBox.Show("deu certo");
+
+
+        }
+        //====================================================================
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //carrega os contatos da base de dados na listbox
+            SQLiteConnection conectar = new SQLiteConnection();
+            conectar.ConnectionString = @"Data source = C:\csharp\base.db; Version = 3";
+            conectar.Open();
+
+            SQLiteDataAdapter adptador = new SQLiteDataAdapter("SELECT * FROM contatos", conectar);
+            DataTable dados = new DataTable();
+            adptador.Fill(dados);
+
+            //apresentar os dados na listbox
+            foreach (DataRow linha in dados.Rows)
+
+            {
+                listBox1.Items.Add(linha["nome"].ToString() + " -> " + linha["telefone"].ToString());
+            }
+        }
+    }
+}
